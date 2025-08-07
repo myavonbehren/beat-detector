@@ -78,14 +78,6 @@ defaults write com.adobe.CSXS.11 PlayerDebugMode 1
 - Restart Premiere Pro after running the command
 
 
-
-**Installation issues**
-```bash
-# If librosa fails to install
-pip install --upgrade pip
-pip install librosa[display] soundfile
-```
-
 ## Test Data
 
 Audio test files used in development are from the [MIREX 2019 Audio Beat Tracking dataset](https://www.music-ir.org/mirex/wiki/2019:Audio_Beat_Tracking).
