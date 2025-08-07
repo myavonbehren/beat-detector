@@ -44,23 +44,28 @@ def convert_beats_to_markerbox(input_file_path, output_filename=None,
     onset_frames = librosa.onset.onset_detect(y=y, sr=sr, delta=delta, wait=5)      
     beat_times = librosa.frames_to_time(onset_frames, sr=sr)
 
-    with open(output_filename, 'w') as f:
+    output_file_path = f"output/{output_filename}"
+
+    with open(output_file_path, 'w') as f:
         for i, beat_time in enumerate(beat_times):
             # Format: time, color, type, name
             f.write(f"{beat_time:.3f}\t{color}\t{marker_type}\tBeat {i+1}\n")
     print(f"Exported {len(beat_times)} beats to {output_filename}")
 
 
+
 '''
 Example Usuage:
 ---------------
+'''
+
 # Basic usage with auto-generate filename
-convert_beats_to_markerbox('audio/birds.mp3') 
+convert_beats_to_markerbox('audio/train/bonus6.wav') 
 
 # More sensitive detection for subtle beats
-convert_beats_to_markerbox('audio/birds.mp3', delta=0.02)
+convert_beats_to_markerbox('audio/train/bonus6.wav', delta=0.02)
 
 # Custom output and styling
-convert_beats_to_markerbox('song.mp3', 'custom_beats.txt', 
+convert_beats_to_markerbox('audio/train/bonus6.wav', 'custom_beats.txt', 
                              delta=0.03, color="blue", marker_type="Chapter")
-'''
+
