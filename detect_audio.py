@@ -1,12 +1,28 @@
 import librosa
 import numpy as np
+import os
 
-def convert_beats_to_markerbox(input_file_path, output_filename, delta, color="blue", marker_type="Chapter"):
+
+
+def convert_beats_to_markerbox(input_file_path, output_filename=None,
+                               delta=0.05, color="green", marker_type="Comment"):
+    '''
+    A simple function that detects beats from an audio file and exports the time
+    frames in text format for the Premiere Pro plugin Markerbox.
+    '''
+    # Check if input file exists
+    if not os.path.exists(input_file_path):
+        print(f"Error: {input_file_path} not found")
+        return
+
+    if output_filename is None:
+        base_name = os.path.splitext(os.path.basename(input_file_path))[0]
+        output_filename = f"{base_name}_markers.txt"
+
+    print(f"Processing {input_file_path}...")
+    
     # Load audio file
     y, sr = librosa.load(input_file_path, sr=None)
-
-    # Detect tempo and beats
-    tempo, beats = librosa.beat.beat_track(y=y, sr=sr)
 
     # Convert beat frames to time stamps (seconds)
     onset_frames = librosa.onset.onset_detect(y=y, sr=sr, delta=delta, wait=5)      
@@ -19,4 +35,6 @@ def convert_beats_to_markerbox(input_file_path, output_filename, delta, color="b
     print(f"Exported {len(beat_times)} beats to {output_filename}")
 
 
-convert_beats_to_markerbox('audio/birds.mp3', 'bird_markers.txt', 0.05)
+# Usage
+# convert_beats_to_markerbox('audio/birds.mp3') # Auto-generates filename
+# convert_beats_to_markerbox('audio/birds.mp3',  delta=0.02) # More sensitive
