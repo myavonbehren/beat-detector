@@ -11,7 +11,10 @@ import IPython.display as ipd
 
 from itertools import cycle
 
-audio_files = glob('audio/0001-1000-midis/*.mid')
+# Load audio files
+audio_files = glob('audio/train/*.wav')
 
 # Play audio file
-ipd.Audio(audio_files[1])
+ipd.Audio(audio_files[0])
+
+y, sr = librosa.load(audio_files[0], sr=None)
