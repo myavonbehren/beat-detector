@@ -2,14 +2,30 @@ import librosa
 import numpy as np
 import os
 
-
-
 def convert_beats_to_markerbox(input_file_path, output_filename=None,
                                delta=0.05, color="green", marker_type="Comment"):
     '''
-    A simple function that detects beats from an audio file and exports the time
-    frames in text format for the Premiere Pro plugin Markerbox.
+    A simple function that detects beats from an audio file and exports timestamps
+    for Premiere Pro's Markerbox extension.
+
+    Parameters:
+    -----------
+    input_file_path : str
+        Path to the input audio file
+    output_filename : str, optional
+        Output filename for the markers file. If None, auto-generates from input filename.
+        Default: None (creates "{input_name}_markers.txt")
+    delta : float, optional
+        Sensitivity threshold for onset detection. Lower values detect more subtle beats
+        Range: 0.01 (very sensitive) to 0.2 (less sensitive). Default: 0.05
+    color : str, optional
+        Marker color in Premiere Pro. Options: "green", "red", "rose", "orange", 
+       "yellow", "white", "blue", "teal". Default: "green"
+    marker_type : str, optional
+        Marker type in Premiere Pro. Options: "Chapter", "Segmentation", "WebLink", 
+       "Comment". Default: "Comment"
     '''
+    
     # Check if input file exists
     if not os.path.exists(input_file_path):
         print(f"Error: {input_file_path} not found")
@@ -35,6 +51,16 @@ def convert_beats_to_markerbox(input_file_path, output_filename=None,
     print(f"Exported {len(beat_times)} beats to {output_filename}")
 
 
-# Usage
-# convert_beats_to_markerbox('audio/birds.mp3') # Auto-generates filename
-# convert_beats_to_markerbox('audio/birds.mp3',  delta=0.02) # More sensitive
+'''
+Example Usuage:
+---------------
+# Basic usage with auto-generate filename
+convert_beats_to_markerbox('audio/birds.mp3') 
+
+# More sensitive detection for subtle beats
+convert_beats_to_markerbox('audio/birds.mp3', delta=0.02)
+
+# Custom output and styling
+convert_beats_to_markerbox('song.mp3', 'custom_beats.txt', 
+                             delta=0.03, color="blue", marker_type="Chapter")
+'''
