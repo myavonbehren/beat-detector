@@ -10,3 +10,8 @@ import librosa.display
 import IPython.display as ipd
 
 from itertools import cycle
+
+audio_files = glob('audio/0001-1000-midis/*.mid')
+
+# Play audio file
+ipd.Audio(audio_files[1])
