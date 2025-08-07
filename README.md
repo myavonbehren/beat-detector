@@ -63,6 +63,7 @@ convert_beats_to_markerbox('your_audio.mp3', 'custom_beats.txt',
 
 **Markerbox plugin not showing in Premiere Pro**
 - Make sure to follow all installation directions [here](https://markerbox.pro/download)
+- If you entered your email and didn't get a download link, check your spam folder
 - If still not visible, check your CSXS version (Mac):
 ```bash
 # Run in terminal to find your CSXS version
