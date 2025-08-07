@@ -1,4 +1,4 @@
-# Beat Tracker for Premiere Pro
+# Beat Detector for Premiere Pro
 
 A simple Python tool that automatically detects beats in audio files and exports them as markers for Adobe Premiere Pro using the Markerbox plugin.
 
